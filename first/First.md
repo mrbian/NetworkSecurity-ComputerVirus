@@ -79,7 +79,7 @@ test2 | 1234562
 - 输入 account : test0, password : 1234560，可以发现登录成功
 ![图5](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first5.png?dir=0&filepath=first%2Ffirst5.png&oid=31dac7051ddebaf2d8b69aba5ec42cd83821f151&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
 - 输入 account : test0, password : wrongPassword，可以发现登录失败
-![图6](http://git.oschina.net/mrbian/ComputerVirus/blob/master/first/first6.png?dir=0&filepath=first%2Ffirst6.png&oid=1d071ad147c76b11e7aff8115204d8ac72b83021&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
+![图6](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first6.png?dir=0&filepath=first%2Ffirst6.png&oid=1d071ad147c76b11e7aff8115204d8ac72b83021&sha=436b3b6849b3f32ede3464bb51fe6186509f3827)
 - 输入 account : ' or 1=1# , password : test，可以发现登录成功！！！
 ![图5](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first5.png?dir=0&filepath=first%2Ffirst5.png&oid=31dac7051ddebaf2d8b69aba5ec42cd83821f151&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
 
