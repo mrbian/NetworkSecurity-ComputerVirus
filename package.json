@@ -1,0 +1,18 @@
+{
+  "name": "computervirus",
+  "version": "1.0.0",
+  "description": "作业",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.oschina.net/mrbian/ComputerVirus.git"
+  },
+  "keywords": [
+    "bian"
+  ],
+  "author": "bian",
+  "license": "MIT"
+}
