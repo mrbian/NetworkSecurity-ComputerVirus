@@ -10,11 +10,11 @@ var fs = require('fs');
 
 module.exports = {
     db: {
-        name: 'postgres',
-        username: 'postgres',
+        name: 'mysql',
+        username: 'root',
         pwd: '123456',
         host:'127.0.0.1',
-        database: 'virusTest',
+        database: 'virustest',
         toString() {
             return `${this.name}://${this.username}:${this.pwd}@${this.host}/${this.database}`;
         }

@@ -9,21 +9,26 @@
 
 从本质上来说，SQL注入和XSS注入很相似，都是因为没有做好对用户的输入控制而导致的错误。
 
-经过考虑，我决定使用NodeJs + PostgresSQL来进行SQL注入的研究。
+经过考虑，我决定使用NodeJs来进行SQL注入的研究。
 - 一是因为我查看网上资料时发现网上的SQL注入示例都是PHP代码编写，为了避嫌使用JavaScript。
 - 二是我对PHP以前研究使用较少，而且近几年从StackOverflow标签热度来分析，可以看出PHP逐渐落寞，JavaScript借着NodeJs一飞冲天。
 不仅是外国，就是在国内，阿里百度等国内互联网公司大部分新业务都开始使用NodeJS来做前后端分离和前端开发工具（虽然NodeJs可以用作后端开发，但是Java的Spring等作为老牌的，成熟稳定的框架，在大公司吃的开，用Node去做后端开发的大型项目还比较少）
 IMG
 - 三是因为我写过四五个后端应用都是使用这一套来开发，算得上是轻车熟路。
 
-### SQL注入初试
+### SQL注入环境准备
 俗话说的好，光说不练假把式，本次作业我就简单地模拟SQL注入，演示一些可能导致SQL注入发生的程序猿的逻辑错误。
-安装PostgresSQL:
+安装PostgresSQL 和 Mysql:
 ```
 sudo apt-get update
 sudo apt-get install postgresql pgadmin3
 sudo pg_createcluster -p 5432 -u postgres 9.3 virusTest --start
 sudo netstat -aWn --programs | grep postgres
+```
+安装Mysql
+```
+sudo apt-get update
+sudo apt-get install mysql-server
 ```
 IMG
 OK,数据库服务启动完毕
@@ -33,4 +38,60 @@ OK,数据库服务启动完毕
 sudo su
 su postgres
 psql
+create database virustest
 ```
+
+接下来在Ubuntu上安装NodeJs
+```
+wget -t https://nodejs.org/dist/v6.9.1/node-v6.9.1-linux-x64.tar.xz
+tar -xf node-v6.9.1-linux-x64.tar.xz
+cd node-v6.9.1-linux-x64.tar.xz/bin
+ln -s *****  /usr/local/bin/node
+ln -s *****  /usr/local/bin/npm
+```
+
+### 数据库初始化和脚手架初始化
+环境搭建后，编写代码建立一张这样的表：
+User表
+
+account | password
+---|---
+test0 | 1234560
+test1 | 1234561
+test2 | 1234562
+
+编写models/index.js,models/migrate.js,models/User.js 
+然后执行```node models/migrate```进行数据库初始化
+编写first/index.js 作为简单的服务器, views/index.html 简单的登录页面
+
+### 简单注入分析
+数据库初始化完成后，我们选择mysql作为本次SQL注入操作的范例，我们来开心的模拟一次简单的登录注入操作 ：
+使用```' or 1=1#```越过账户名和密码限制
+
+首先安装所有依赖
+```npm install```
+然后启动服务器 
+```node first/index.js```
+访问```http://localhost:5000/```看到如下网页
+first3.png
+测试三次： 
+
+- 输入 account : test0, password : 1234560，可以发现登录成功
+first5.png
+- 输入 account : test0, password : wrongPassword，可以发现登录失败
+first6.png
+- 输入 account : ' or 1=1# , password : test，可以发现登录成功！！！
+first5.png
+
+我们来看SQL语句是怎么写的： 
+```sql
+`select * from Users where account ='${account}' and password='${password}'`
+```
+很明显，直接写SQL拼接account和password导致了严重的后果，让用户能够绕开密码限制直接登录某一用户的账户
+原因就是拼接完成后变成了： ```select * from users where account = '' or 1=1#' and password='password'```
+
+不只是账户密码登录层面，很明显，在某些查询依然有可能发生SQL语句注入，比如某些商品敏感信息的查询，传入商品名的时候也这么注入，就有可能使用这样的漏洞查询到自己没有权限查看的东西;
+这个注入的经典之处就在于使用 ' 这个字符串，有些后台使用 " 连接，所以在书写后台代码的时候要注意对 ' 或者 " 字符串的使用。
+pgsql很明显在这方面比mysql更安全，因为 pgsql 查询语言要求查询语句中table要加上""，列名也要加上""
+
+本次作业简单实践并分析了一种SQL注入，随着不断的深入研究，本节有待完善。
