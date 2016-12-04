@@ -13,7 +13,7 @@
 - 一是因为我查看网上资料时发现网上的SQL注入示例都是PHP代码编写，为了避嫌使用JavaScript。
 - 二是我对PHP以前研究使用较少，而且近几年从StackOverflow标签热度来分析，可以看出PHP逐渐落寞，JavaScript借着NodeJs一飞冲天。
 不仅是外国，就是在国内，阿里百度等国内互联网公司大部分新业务都开始使用NodeJS来做前后端分离和前端开发工具（虽然NodeJs可以用作后端开发，但是Java的Spring等作为老牌的，成熟稳定的框架，在大公司吃的开，用Node去做后端开发的大型项目还比较少）
-IMG
+![图1](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first1.jpg?dir=0&filepath=first%2Ffirst1.jpg&oid=175aab7924ba74ae33cc76eb731b8c7acd501e78&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
 - 三是因为我写过四五个后端应用都是使用这一套来开发，算得上是轻车熟路。
 
 ### SQL注入环境准备
@@ -30,7 +30,7 @@ sudo netstat -aWn --programs | grep postgres
 sudo apt-get update
 sudo apt-get install mysql-server
 ```
-IMG
+![图2](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first2.png?dir=0&filepath=first%2Ffirst2.png&oid=1e3fd0aee14c8bdd7cccc465402dc010ffde73ad&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
 OK,数据库服务启动完毕
 
 现在创建数据库
@@ -73,15 +73,16 @@ test2 | 1234562
 然后启动服务器 
 ```node first/index.js```
 访问```http://localhost:5000/```看到如下网页
-first3.png
+![图3](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first2.png?dir=0&filepath=first%2Ffirst2.png&oid=1e3fd0aee14c8bdd7cccc465402dc010ffde73ad&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
 测试三次： 
 
 - 输入 account : test0, password : 1234560，可以发现登录成功
-first5.png
+![图5](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first5.png?dir=0&filepath=first%2Ffirst5.png&oid=31dac7051ddebaf2d8b69aba5ec42cd83821f151&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
 - 输入 account : test0, password : wrongPassword，可以发现登录失败
-first6.png
+![图6](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first6.png?dir=0&filepath=first%2Ffirst6.png&oid=1d071ad147c76b11e7aff8115204d8ac72b83021&sha=436b3b6849b3f32ede3464bb51fe6186509f3827)
 - 输入 account : ' or 1=1# , password : test，可以发现登录成功！！！
-first5.png
+![图5](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first5.png?dir=0&filepath=first%2Ffirst5.png&oid=31dac7051ddebaf2d8b69aba5ec42cd83821f151&sha=9b6138b29e99be01f6ddb816133001f53d96185e)
+
 
 我们来看SQL语句是怎么写的： 
 ```sql
