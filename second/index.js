@@ -12,16 +12,21 @@ const util = require("util");
 const Koa = require("koa");
 const open = require("open");
 const app = Koa();
+const serve = require("koa-static");
 const views = require("koa-views");
 const koaBody = require("koa-body")();
+
 const debug = require("debug")("sql");
 
-const db = require("models/");
+const db = require("./models/");
 const models = db.models;
 const User = models.User;
 
 var pkg = require("../package.json");
 var port = pkg.port;
+var proxyPort = pkg.proxyPort;
+
+app.use(serve(__dirname + '../public'));
 
 app.use(koaBody);
 
@@ -65,10 +70,7 @@ app.use(function *(){
 
 const server = http.createServer(app.callback());
 server.listen(port,() => {
-    var url = util.format('http://%s:%d', 'localhost', port);
-
-    console.log('Listening at %s', url);
-
+    var url = util.format('http://%s:%d', 'localhost', proxyPort);
     // gvfs-open http://localhost
-    open(url);
+    // open(url);
 });

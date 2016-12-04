@@ -10,6 +10,7 @@
 const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
+const spawn = require('child_process').spawn;
 
 const gulp = require("gulp");
 const colors = require("colors");
@@ -27,6 +28,10 @@ colors.setTheme({
 });
 const gutil = require("gulp-util");
 const runSequence = require("run-sequence");
+var browserSync = require('browser-sync').create();
+var sass = require("gulp-ruby-sass");
+var filter = require('gulp-filter');
+var reload = browserSync.reload;
 
 const dirName = require("./config").dirName;
 
@@ -68,7 +73,7 @@ gulp.task('continue', (done) => {
         if(answer === "yes" || answer === "y"){
             fs.mkdirSync(path.join(__dirname,`${lastName}`));
             gulp
-                .src(`${curName}/**/*.{js,html,css}`)
+                .src(`${curName}/**/*.{js,html,css,scss,sass}`)
                 .pipe(gulp.dest(`${lastName}/`));
         }else{
             curName = arr[arr.length - 2];
@@ -77,3 +82,25 @@ gulp.task('continue', (done) => {
         done();
     });
 });
+
+gulp.task('serve', ['sass'], function() {
+
+    spawn("npm",["run","dev"]);
+
+    browserSync.init({
+        proxy: "http://localhost:3010",
+        port : 3030
+    });
+
+    gulp.watch("**/*.scss", ['sass']);
+    gulp.watch("**/*.html").on('change', reload);
+});
+
+gulp.task('sass', function () {
+    return sass("**/*.scss",{sourcemap: false})
+        .pipe(gulp.dest("public/dist/css")) // Write the CSS
+        .pipe(filter('**/*.css')) // Filtering stream to only css files
+        .pipe(browserSync.reload({stream:true}));
+});
+
+gulp.task("default",["serve"]);

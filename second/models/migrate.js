@@ -20,7 +20,13 @@ function * UserSeed(){
 }
 
 function * ArticleSeed(){
-
+    console.info("ArticleSeed");
+    for(var i=0;i < 10;i ++){
+        yield Article.create({
+            title : "文章" + i,
+            content : `这是文章${i}内容`
+        });
+    }
 }
 
 function *init(){

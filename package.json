@@ -4,7 +4,8 @@
   "description": "作业",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=sql supervisor -i README.md second/index",
+    "dev": "DEBUG=sql supervisor -i README.md,gulpfile.js,dist/*,public second/index",
+    "start" : "gulp",
     "test": "mocha second/test"
   },
   "repository": {
@@ -15,6 +16,7 @@
     "bian"
   ],
   "port": 3010,
+  "proxyPort": 3030,
   "author": "bian",
   "license": "MIT",
   "dependencies": {
@@ -22,8 +24,10 @@
     "colors": "^1.1.2",
     "debug": "^2.3.3",
     "ejs": "^2.5.2",
+    "gulp-ruby-sass": "^2.1.1",
     "koa": "^1.2.4",
     "koa-body": "^1.6.0",
+    "koa-static": "^2.0.0",
     "koa-views": "^4.1.0",
     "mysql": "^2.12.0",
     "open": "0.0.5",
@@ -31,6 +35,8 @@
     "sequelize": "^3.27.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.18.2",
+    "gulp": "^3.9.1",
     "gulp-template": "^4.0.0"
   }
 }
