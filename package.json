@@ -4,8 +4,8 @@
   "description": "作业",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=sql supervisor -i README.md first/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "DEBUG=sql supervisor -i README.md second/index",
+    "test": "mocha second/test"
   },
   "repository": {
     "type": "git",
@@ -14,17 +14,23 @@
   "keywords": [
     "bian"
   ],
+  "port": 3010,
   "author": "bian",
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
+    "colors": "^1.1.2",
     "debug": "^2.3.3",
     "ejs": "^2.5.2",
     "koa": "^1.2.4",
     "koa-body": "^1.6.0",
     "koa-views": "^4.1.0",
     "mysql": "^2.12.0",
+    "open": "0.0.5",
     "pg": "^6.1.0",
     "sequelize": "^3.27.0"
+  },
+  "devDependencies": {
+    "gulp-template": "^4.0.0"
   }
 }
