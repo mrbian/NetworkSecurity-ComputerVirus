@@ -6,13 +6,13 @@
 ### SQL注入前准备
 - 生成测试需要的数据库和表
 编写models/Article和models/migrate.js，然后运行node models/migrate重置数据库，生成如下图所示的Articles表：
-
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second1.png?dir=0&filepath=second%2Fimages%2Fsecond1.png&oid=ad65c704b7552c852a4a508338fdb9cc0a7d1c17&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
 
 - 编写路由代码：
 ```javascript
+
 router.get("/article",function *(){
     var ctx = this;
     var query = ctx.request.query;
@@ -28,11 +28,11 @@ router.get("/article",function *(){
     // debug(data);
     yield ctx.render("index.html", data);
 })
+
 ```
 上面是一个路由函数。简单的说就是处理GET参数id，然后使用SQL对id进行查询，得到数据渲染html返回给浏览器端。
 对应路由是```http://localhost:3030/article?id=1```
 运行起来如下图：
-
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second2.png?dir=0&filepath=second%2Fimages%2Fsecond2.png&oid=31bb9fedb84be69ba698f50b9b543e1109ba2054&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
