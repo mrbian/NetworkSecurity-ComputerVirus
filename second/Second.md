@@ -65,7 +65,6 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,2,3,4,5
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second5.png?dir=0&filepath=second%2Fimages%2Fsecond5.png&oid=841a123777bf1e7491dbcf28670f186a22957258&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 这个时候我们发现页面会发现展示的还是id=3的文章，返回信息没有变化，为什么呢?
 我们看路由处理里面的代码，会发现取得数据是数组的第一个：
 <div align="center">
@@ -80,12 +79,10 @@ http://localhost:3030/article?id=3 and 1=1 union select 10000,2,3,4,5 order by i
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second7.png?dir=0&filepath=second%2Fimages%2Fsecond7.png&oid=d71a2ad62bb3005184a590b1052ad05f5d26770c&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 页面的返回结果是：
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second8.png?dir=0&filepath=second%2Fimages%2Fsecond8.png&oid=4b28e96ca18ac5fe5faddf018269ba88302ffb87&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 ！！！我们可以看到我们输入的2，3分别在这里被展示在了页面上，开心O(∩_∩)O哈哈~，这说明我们只要将2,3改成我们想要的信息就可以随意查看，好的，下面我们来进行第三步
 
 - 第三步，得到数据库的信息：
