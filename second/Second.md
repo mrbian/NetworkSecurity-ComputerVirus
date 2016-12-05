@@ -28,9 +28,7 @@ router.get("/article",function *(){
     yield ctx.render("index.html", data);
 })
 ```
-上面是一个路由函数。简单的说就是处理GET参数id，然后使用SQL对id进行查询，得到数据渲染html返回给浏览器端。
-对应路由是```http://localhost:3030/article?id=1```
-运行起来如下图：
+上面是一个路由函数。简单的说就是处理GET参数id，然后使用SQL对id进行查询，得到数据渲染html返回给浏览器端。对应路由是```http://localhost:3030/article?id=1```运行起来如下图：
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second2.png?dir=0&filepath=second%2Fimages%2Fsecond2.png&oid=31bb9fedb84be69ba698f50b9b543e1109ba2054&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
@@ -39,9 +37,7 @@ router.get("/article",function *(){
 引入browsersync和gulp自动脚本，与注入无关，略过
 
 ### SQL注入测试
-首先测试 ```http://localhost:3030/article？id=3/*ABC*/```
-可以发现返回的页面没有变化，说明对输入没有过滤，这里是可以注入的。
-现在我们使用自己写的union进行邪恶地拖库（注：造成空格有两种：一种直接加空格Encode之后就是  ，一种使用/\*\*/注释来分隔，下面我们空格方便查看）
+首先测试 ```http://localhost:3030/article？id=3/*ABC*/```。可以发现返回的页面没有变化，说明对输入没有过滤，这里是可以注入的。现在我们使用自己写的union进行邪恶地拖库（注：造成空格有两种：一种直接加空格Encode之后就是  ，一种使用/\*\*/注释来分隔，下面我们空格方便查看）
 - 第一步，测试SQL注入语句，访问```http://localhost:3030/article?id=3 and 1=2```
 可以发现页面显示没有文章，因为1=2永远为false，所以返回的是没有文章。
 <div align="center">
@@ -70,7 +66,6 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,2,3,4,5
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second6.png?dir=0&filepath=second%2Fimages%2Fsecond6.png&oid=f2643606e71c9dffd36753c57ecc3572008e7d31&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 所以碰到这种情况我们只要加一个order by id DESC就可以了：
 ```
 http://localhost:3030/article?id=3 and 1=1 union select 10000,2,3,4,5 order by id DESC  
@@ -133,5 +128,4 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,account,password,4,5 f
 不断F5刷新，就可以看到所有的account和password
 
 ### 简单的注入分析
-以上所有的注入过程都是对普通SQL语言的利用。
-开发一个项目的时经常用到类似于id=?或者title=?这样的GET参数查询，不只是页面展示，在Restful API的时代，无论是前端web，还是手机app，与后端通信也很有可能会有很多这样的漏洞。很普遍的注入模式，造成的后果往往是灾难性的。
+以上所有的注入过程都是对普通SQL语言的利用。开发一个项目的时经常用到类似于id=?或者title=?这样的GET参数查询，不只是页面展示，在Restful API的时代，无论是前端web，还是手机app，与后端通信也很有可能会有很多这样的漏洞。很普遍的注入模式，造成的后果往往是灾难性的。
