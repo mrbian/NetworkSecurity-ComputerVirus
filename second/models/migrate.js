@@ -8,6 +8,7 @@ const db = require("./index");
 const co = require("co");
 const models = db.models;
 const User = models.User;
+const Article = models.Article;
 
 function * UserSeed(){
     console.info("UserSeed");
@@ -23,8 +24,8 @@ function * ArticleSeed(){
     console.info("ArticleSeed");
     for(var i=0;i < 10;i ++){
         yield Article.create({
-            title : "文章" + i,
-            content : `这是文章${i}内容`
+            title : "SQL注入研究---" + (i+1),
+            content : `<p>这是文章${i}内容</p>`
         });
     }
 }
@@ -37,6 +38,7 @@ function *init(){
 co(function *(){
     yield db.sync({force:true});
     yield init();
+    console.log("over");
     process.exit(0);
 }).catch((err) => {
     console.error(err);

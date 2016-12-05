@@ -85,7 +85,19 @@ gulp.task('continue', (done) => {
 
 gulp.task('serve', ['sass'], function() {
 
-    spawn("npm",["run","dev"]);
+    const nodeServer = spawn("npm",["run","dev"]);
+
+    nodeServer.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+    });
+
+    nodeServer.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`);
+    });
+
+    nodeServer.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+    });
 
     browserSync.init({
         proxy: "http://localhost:3010",
@@ -98,7 +110,7 @@ gulp.task('serve', ['sass'], function() {
 
 gulp.task('sass', function () {
     return sass("**/*.scss",{sourcemap: false})
-        .pipe(gulp.dest("public/dist/css")) // Write the CSS
+        .pipe(gulp.dest("public/dist/")) // Write the CSS
         .pipe(filter('**/*.css')) // Filtering stream to only css files
         .pipe(browserSync.reload({stream:true}));
 });

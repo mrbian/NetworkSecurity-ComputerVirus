@@ -1,0 +1,50 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "微软雅黑",sans-serif; }
+
+div.body_cr .container {
+  margin: 0 auto;
+  width: 600px;
+  padding: 20px;
+  margin-top: 20px; }
+  div.body_cr .container .title {
+    font-size: 24px; }
+  div.body_cr .container hr.seg {
+    height: 0;
+    border-top: 1px solid #efefef;
+    margin: 10px 0; }
+  div.body_cr .container .article_date {
+    font-size: 16px;
+    color: #8c8c8c; }
+  div.body_cr .container .quote_cr {
+    font-size: 14px;
+    border-left: 4px solid #efefef;
+    margin: 20px 0px;
+    padding-left: 10px;
+    height: 60px; }
+    div.body_cr .container .quote_cr p {
+      min-height: 26px;
+      display: block;
+      word-wrap: break-word; }
+  div.body_cr .container .quote_cr:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle; }
+  div.body_cr .container .quote {
+    display: inline-block;
+    vertical-align: middle; }
+  div.body_cr .container div.content {
+    font-size: 16px; }
+    div.body_cr .container div.content p {
+      min-height: 26px;
+      display: block;
+      word-wrap: break-word;
+      margin-bottom: 10px; }

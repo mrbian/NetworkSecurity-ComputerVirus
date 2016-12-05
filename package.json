@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "DEBUG=sql supervisor -i README.md,gulpfile.js,dist/*,public second/index",
-    "start" : "gulp",
+    "start": "gulp",
     "test": "mocha second/test"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "gulp-ruby-sass": "^2.1.1",
     "koa": "^1.2.4",
     "koa-body": "^1.6.0",
+    "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
     "koa-views": "^4.1.0",
     "mysql": "^2.12.0",
