@@ -6,8 +6,7 @@
 ### SQL注入前准备
 - 生成测试需要的数据库和表
 编写models/Article和models/migrate.js，然后运行node models/migrate重置数据库，生成如下图所示的Articles表：
-![second1.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second1.png?dir=0&filepath=second%2Fimages%2Fsecond1.png&oid=ad65c704b7552c852a4a508338fdb9cc0a7d1c17&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5)
-
+![second1.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second1.png?dir=0&filepath=second%2Fimages%2Fsecond1.png&oid=ad65c704b7552c852a4a508338fdb9cc0a7d1c17&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5=100x100)
 - 编写路由代码：
 ```javascript
 router.get("/article",function *(){
