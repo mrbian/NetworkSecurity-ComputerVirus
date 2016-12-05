@@ -11,8 +11,7 @@
 </div> 
 
 - 编写路由代码：
-```javascript
-
+```
 router.get("/article",function *(){
     var ctx = this;
     var query = ctx.request.query;
@@ -28,7 +27,6 @@ router.get("/article",function *(){
     // debug(data);
     yield ctx.render("index.html", data);
 })
-
 ```
 上面是一个路由函数。简单的说就是处理GET参数id，然后使用SQL对id进行查询，得到数据渲染html返回给浏览器端。
 对应路由是```http://localhost:3030/article?id=1```
