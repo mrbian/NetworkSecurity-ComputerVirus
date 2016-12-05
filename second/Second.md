@@ -110,7 +110,7 @@ http://localhost:3030/article?id=3 and 1=1 union select 10000,2,TABLE_NAME,4,5 F
 ```
 order by rand()是为了能够查看到所有的表名，我们多执行几次，就可以看到有一个Users表：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second10.png?dir=0&filepath=second%2Fimages%2Fsecond10.png&oid=7c04e1e47934c7e01b17781ad2307ac931a1a142&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align=center />
+<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second10.png?dir=0&filepath=second%2Fimages%2Fsecond10.png&oid=7c04e1e47934c7e01b17781ad2307ac931a1a142&sha=ca6c943f09be7b21a326ac9e4b2720d8cd6094d5" width = "500" height = "auto" alt="图片名称" align="center" />
 </div> 
 
 这个表就有意思了，我们来继续注入，尝试着拿到用户名和密码
