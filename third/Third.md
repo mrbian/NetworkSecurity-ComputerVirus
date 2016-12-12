@@ -7,9 +7,9 @@
 ![third1.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third1.png)
 
 我自己经过删选测试，选取了三个网站：
-- http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSx2ZXJzaW9uKCksZGF0YWJhc2UoKSw0LDUsNiw3LDgsOSwxMCwxMSwxMiwxMywxNCwxNQ==
-- http://www.thzx.net/e/pl/?classid=34&id=1373(一所高中)
-- http://www.zaaffran.com/testimonials.php?id=MTM=(一家印度餐厅)
+- [http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSx2ZXJzaW9uKCksZGF0YWJhc2UoKSw0LDUsNiw3LDgsOSwxMCwxMSwxMiwxMywxNCwxNQ==](http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSx2ZXJzaW9uKCksZGF0YWJhc2UoKSw0LDUsNiw3LDgsOSwxMCwxMSwxMiwxMywxNCwxNQ==)
+- [http://www.thzx.net/e/pl/?classid=34&id=1373](http://www.thzx.net/e/pl/?classid=34&id=1373) 一所高中
+- [http://www.zaaffran.com/testimonials.php?id=MTM=](http://www.zaaffran.com/testimonials.php?id=MTM=) 一家印度餐厅主页
 
 本次就对这三个网站进行破解。
 先回顾一下我们上次自己研究的几个破解步骤：
