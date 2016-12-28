@@ -73,7 +73,7 @@ test2 | 1234562
 然后启动服务器 
 ```node first/index.js```
 访问```http://localhost:5000/```看到如下网页
-![图3](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first4.png)
+![图3](http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first3.png)
 测试三次： 
 
 - 输入 account : test0, password : 1234560，可以发现登录成功
