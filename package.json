@@ -33,7 +33,7 @@
     "mysql": "^2.12.0",
     "open": "0.0.5",
     "pg": "^6.1.0",
-    "sequelize": "^3.27.0"
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "browser-sync": "^2.18.2",
